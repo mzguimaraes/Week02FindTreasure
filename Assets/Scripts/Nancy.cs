@@ -22,7 +22,7 @@ public class Nancy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float distance = (player.position - transform.position).magnitude;
-        Debug.Log(distance);
+        //Debug.Log(distance);
 	    if(distance < inboundDistance) {
             if (!inbound) {
                 UIText.text = "Nancy Lee: OK, I've hacked the locked door for you.\nFollow the red darts back then go south at the black dart!\n";

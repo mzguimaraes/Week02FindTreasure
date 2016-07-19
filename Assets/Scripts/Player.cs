@@ -6,8 +6,14 @@ public class Player : MonoBehaviour {
     public float moveSpeed = 20f;
 	public Bomb bomb;
 
-	private bool hasBomb = true;
-	[HideInInspector] public bool bombOut = false;
+	private bool hasBomb = true; //player has picked up bombs
+
+	private bool bombOut = false; //bomb exists in world (forces 1 bomb limit)
+	public bool BombOut { //property (provides public access to bombOut)
+		set {
+			bombOut = value;
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
