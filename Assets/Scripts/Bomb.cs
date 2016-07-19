@@ -7,7 +7,7 @@ public class Bomb : MonoBehaviour {
 
 	public float fuseTime = 3f;
 	public float blastRadius = 3f;
-	public float blastForce = 500f;
+	public float blastForce = 500000f;
 
 	private float countDown;
 
@@ -36,17 +36,16 @@ public class Bomb : MonoBehaviour {
 
 		//iterate through objects hit.  if destructible, then deactivate.  if player, push back
 		foreach (Collider2D obj in targets) {
-			Debug.Log(obj.name);
+			//Debug.Log(obj.name);
 			if ( obj.gameObject.GetComponent<Destructible>() != null  ) { //destructible
 				//obj.gameObject.SetActive(false);
 				Destroy(obj.gameObject);
 			}
 			else if  (obj.gameObject.GetComponent<Player>() != null) { //player
-				Vector2 blastDir = obj.gameObject.transform.position - 
-					transform.position; //vector from bomb to player
+				Vector2 blastDir = obj.gameObject.transform.position - transform.position; //vector from bomb to player
 
-				blastDir = blastDir / blastDir.magnitude; //normalize
-				blastDir = blastDir * blastForce; //give magnitude of blastForce
+				blastDir /= blastDir.magnitude; //normalize
+				blastDir *= blastForce; //give magnitude of blastForce
 
 				obj.attachedRigidbody.AddForce(blastDir);
 			}
