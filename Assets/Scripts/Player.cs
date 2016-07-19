@@ -2,15 +2,18 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
+	
     public float moveSpeed = 20f;
-	// Use this for initialization
-	void Start () {
-	    
-	}
+	public Bomb bomb;
+
+	private bool hasBomb = true;
+	[HideInInspector] public bool bombOut = false;
 	
 	// Update is called once per frame
 	void Update () {
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+
+		//TODO: redo movement to support bomb physics (use GetAxis/normalize method learned Monday)
 
         // use W,A,S,D to move the player around
         if (Input.GetKey(KeyCode.W)) {
@@ -25,5 +28,10 @@ public class Player : MonoBehaviour {
         if (Input.GetKey(KeyCode.D)) {
             GetComponent<Rigidbody2D>().velocity += new Vector2(moveSpeed, 0) * Time.deltaTime;
         }
+
+		if (hasBomb && !bombOut && Input.GetKey(KeyCode.F)) {
+			bombOut = true;
+			Instantiate(bomb, transform.position, Quaternion.identity);
+		}
     }
 }
