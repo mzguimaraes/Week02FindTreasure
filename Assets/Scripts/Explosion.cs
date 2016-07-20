@@ -15,7 +15,11 @@ public class Explosion : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(countDown <= 0) {
-			Destroy(gameObject);
+			//Destroy(gameObject);
+			GetComponent<SpriteRenderer>().enabled = false;
+			if (GetComponent<AudioSource>().isPlaying == false) { //sound clip is done
+				Destroy(gameObject);
+			}
 		}
 		else {
 			countDown -= Time.deltaTime;

@@ -25,7 +25,7 @@ public class Bomb : MonoBehaviour {
 		}
 		else if (countDown % flashRate <= flashRate / 3.0f) { //flash
 			gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-			//flashRate -= 0.1f * flashRate; //make flashes closer as bomb nears explosion
+			//flashRate -= 0.1f * flashRate; //make flashes closer as bomb nears explosion TODO
 		}
 		else {
 		gameObject.GetComponent<SpriteRenderer>().color = Color.white;
@@ -50,7 +50,9 @@ public class Bomb : MonoBehaviour {
 			else if  (obj.gameObject.GetComponent<Player>() != null) { //player
 				Vector2 blastDir = obj.gameObject.transform.position - transform.position; //vector from bomb to player
 
-				blastDir /= blastDir.magnitude; //normalize
+				if (blastDir.magnitude > 0){
+					blastDir /= blastDir.magnitude; //normalize
+				}
 				blastDir *= blastForce; //give magnitude of blastForce
 
 				obj.attachedRigidbody.AddForce(blastDir); //TODO: find out how to make this happen in FixedUpdate

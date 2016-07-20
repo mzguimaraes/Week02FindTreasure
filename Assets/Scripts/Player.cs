@@ -8,9 +8,15 @@ public class Player : MonoBehaviour {
 	//public float decelScalar = .5f; //scalar to decelerate by if no input
 	public Bomb bomb;
 
-	private bool hasBomb = true; //player has picked up bombs
 	private Rigidbody2D rb2d;
 	private Vector2 moveForce;
+
+	private bool hasBomb = false; //player has picked up bombs
+	public bool HasBomb {
+		set {
+			hasBomb = value;
+		}
+	}
 
 	//bomb exists in world (forces 1 bomb limit)
 	private bool bombOut = false; 
@@ -26,23 +32,6 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-
-
-        // use W,A,S,D to move the player around
-//        if (Input.GetKey(KeyCode.W)) {
-//            GetComponent<Rigidbody2D>().velocity += new Vector2(0, moveSpeed) * Time.deltaTime;
-//        }
-//        if (Input.GetKey(KeyCode.S)) {
-//            GetComponent<Rigidbody2D>().velocity += new Vector2(0, -moveSpeed) * Time.deltaTime;
-//        }
-//        if (Input.GetKey(KeyCode.A)) {
-//            GetComponent<Rigidbody2D>().velocity += new Vector2(-moveSpeed, 0) * Time.deltaTime;
-//        }
-//        if (Input.GetKey(KeyCode.D)) {
-//            GetComponent<Rigidbody2D>().velocity += new Vector2(moveSpeed, 0) * Time.deltaTime;
-//        }
-
 		//get input vector
 		float horizontal = Input.GetAxis("Horizontal") * moveScalar * Time.deltaTime;
 		float vertical = Input.GetAxis("Vertical") * moveScalar * Time.deltaTime;

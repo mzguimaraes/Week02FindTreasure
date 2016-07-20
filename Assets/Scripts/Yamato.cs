@@ -5,9 +5,11 @@ using UnityEngine.UI;
 public class Yamato : MonoBehaviour {
     public Text UIText;
     public Transform player;
+	public GameObject appearingDoor;
 
     public float inboundDistance = 1.5f;
     public float outboundDistance = 4f;
+
     // Use this for initialization
     string defaultText;
     bool inbound;
@@ -19,10 +21,11 @@ public class Yamato : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float distance = (player.position - transform.position).magnitude;
-        //Debug.Log(distance);
 	    if(distance < inboundDistance) {
             if (!inbound) {
-                UIText.text = "Yamato Koki: You are heading the wrong way.\nGo back and follow the red ninja darts.\n";
+                UIText.text = "These bombs will aid your in your quest!  Press [F] to use them!\n";
+				player.GetComponent<Player>().HasBomb = true;
+				appearingDoor.SetActive(true);
                 inbound = true;
             }
         } else if (inbound && distance > outboundDistance) {
