@@ -3,11 +3,13 @@ using System.Collections;
 
 public class Bomb : MonoBehaviour {
 
-	//TODO: add sound and animation
+	//TODO: add sound
 
 	public float fuseTime = 3f;
 	public float blastRadius = 3f;
 	public float blastForce = 500000f;
+	public float flashRate = 0.33f; //rate at which the bomb flashes
+	public Explosion explosion;
 
 	private float countDown;
 
@@ -21,9 +23,15 @@ public class Bomb : MonoBehaviour {
 		if (countDown <= 0) {
 			detonate();
 		}
-		else {
-			countDown -= Time.deltaTime;
+		else if (countDown % flashRate <= flashRate / 3.0f) { //flash
+			gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+			//flashRate -= 0.1f * flashRate; //make flashes closer as bomb nears explosion
 		}
+		else {
+		gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+		}
+		countDown -= Time.deltaTime;
+		
 	}
 
 	/*
@@ -36,9 +44,7 @@ public class Bomb : MonoBehaviour {
 
 		//iterate through objects hit.  if destructible, then deactivate.  if player, push back
 		foreach (Collider2D obj in targets) {
-			//Debug.Log(obj.name);
 			if ( obj.gameObject.GetComponent<Destructible>() != null  ) { //destructible
-				//obj.gameObject.SetActive(false);
 				Destroy(obj.gameObject);
 			}
 			else if  (obj.gameObject.GetComponent<Player>() != null) { //player
@@ -47,10 +53,11 @@ public class Bomb : MonoBehaviour {
 				blastDir /= blastDir.magnitude; //normalize
 				blastDir *= blastForce; //give magnitude of blastForce
 
-				obj.attachedRigidbody.AddForce(blastDir);
+				obj.attachedRigidbody.AddForce(blastDir); //TODO: find out how to make this happen in FixedUpdate
 			}
 		}
 		GameObject.FindObjectOfType<Player>().BombOut = false;
+		Instantiate(explosion, transform.position, Quaternion.identity);
 		Destroy(this.gameObject);
 	}
 
