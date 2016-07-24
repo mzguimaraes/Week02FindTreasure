@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bomb : MonoBehaviour {
+using UnityEngine.UI;
 
-	//TODO: add sound
+public class Bomb : MonoBehaviour {
 
 	public float fuseTime = 3f;
 	public float blastRadius = 3f;
 	public float blastForce = 500000f;
 	public float flashRate = 0.33f; //rate at which the bomb flashes
 	public Explosion explosion;
+	public static bool isPoweredUp;
+//	public Text UIText;
 
 	private float countDown;
 
 	// bomb dropped
 	void Start () {
 		countDown = fuseTime;
+		isPoweredUp = false;
 	}
 	
 	// Update is called once per frame
@@ -39,13 +42,27 @@ public class Bomb : MonoBehaviour {
 	 */
 	void detonate() {
 
+		Debug.Log(isPoweredUp);
+
 		//get array of colliders in range
 		Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, blastRadius);
 
 		//iterate through objects hit.  if destructible, then deactivate.  if player, push back
 		foreach (Collider2D obj in targets) {
 			if ( obj.gameObject.GetComponent<Destructible>() != null  ) { //destructible
-				Destroy(obj.gameObject);
+				if (!obj.GetComponent<Destructible>().isStrongWall){
+					Destroy(obj.gameObject);
+				}
+				else { //isStrongWall == true
+					if (isPoweredUp) {
+						Debug.Log("strong destroy");
+						Destroy(obj.gameObject);
+					}
+//					else {
+//						if (UIText != null)
+//							UIText.text = "This door is too strong!  You need to find a master hacker to power up your bombs!";
+//					}
+				}
 			}
 			else if  (obj.gameObject.GetComponent<Player>() != null) { //player
 				Vector2 blastDir = obj.gameObject.transform.position - transform.position; //vector from bomb to player
@@ -55,7 +72,7 @@ public class Bomb : MonoBehaviour {
 				}
 				blastDir *= blastForce; //give magnitude of blastForce
 
-				obj.attachedRigidbody.AddForce(blastDir); //TODO: find out how to make this happen in FixedUpdate
+				obj.attachedRigidbody.AddForce(blastDir);
 			}
 		}
 		GameObject.FindObjectOfType<Player>().BombOut = false;

@@ -12,11 +12,10 @@ public class Nancy : MonoBehaviour {
     // Use this for initialization
     string defaultText;
     bool inbound;
-    bool hasOpen;
+
 	void Start () {
         defaultText = UIText.GetComponent<TextController>().defaultText;
         inbound = false;
-        hasOpen = false;
 	}
 	
 	// Update is called once per frame
@@ -25,11 +24,10 @@ public class Nancy : MonoBehaviour {
         //Debug.Log(distance);
 	    if(distance < inboundDistance) {
             if (!inbound) {
-                UIText.text = "Nancy Lee: OK, I've hacked the locked door for you.\nFollow the red darts back then go south at the black dart!\n";
+                UIText.text = "Nancy Lee: OK, I've hacked your bombs--they're stronger now!\nFollow the red darts back then go south at the black dart!\n";
                 inbound = true;
-                if (!hasOpen) {
-                    hasOpen = true;
-                    door.GetComponent<DoorController>().isOpen = true;
+				if (!Bomb.isPoweredUp) {
+					Bomb.isPoweredUp = true;
                 }
                 
             }

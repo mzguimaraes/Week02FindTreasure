@@ -18,6 +18,16 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	private bool hasKey = false;
+	public bool HasKey {
+		get {
+			return hasKey;
+		}
+		set {
+			hasKey = value;
+		}
+	}
+
 	//bomb exists in world (forces 1 bomb limit)
 	private bool bombOut = false; 
 	public bool BombOut { //property (provides public access to bombOut)

@@ -23,8 +23,9 @@ public class Silver : MonoBehaviour {
         //Debug.Log(distance);
 	    if(distance < inboundDistance) {
             if (!inbound) {
-                UIText.text = "Silver Ninja: Go back and head north at the white dart.\nAsk the Genocide Ninja about it.\n";
-                inbound = true;
+                UIText.text = "Silver Ninja: Go back and head west at the white dart.\nUse this key to find Nancy!\n";
+				player.GetComponent<Player>().HasKey = true;
+				inbound = true;
             }
         } else if (inbound && distance > outboundDistance) {
             UIText.text = defaultText;
