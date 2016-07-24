@@ -23,7 +23,12 @@ public class Yamato : MonoBehaviour {
         float distance = (player.position - transform.position).magnitude;
 	    if(distance < inboundDistance) {
             if (!inbound) {
-                UIText.text = "These bombs will aid your in your quest!  Press [F] to use them!\n";
+                UIText.text = "Yamato: These bombs will aid your in your quest!  Press [F] to use them!\n";
+
+				//update defaultText
+				defaultText = "Use the bombs to blast open the path!";
+				UIText.GetComponent<TextController>().defaultText = defaultText;
+
 				player.GetComponent<Player>().HasBomb = true;
 				appearingDoor.SetActive(true);
                 inbound = true;

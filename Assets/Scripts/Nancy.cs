@@ -24,8 +24,13 @@ public class Nancy : MonoBehaviour {
         //Debug.Log(distance);
 	    if(distance < inboundDistance) {
             if (!inbound) {
-                UIText.text = "Nancy Lee: OK, I've hacked your bombs--they're stronger now!\nFollow the orange darts back then go south at the black dart!\n";
-                inbound = true;
+                UIText.text = "Nancy Lee: OK, I've hacked your bombs--they're stronger now!";
+
+				//update defaultText
+				defaultText = "Use the strong bombs to blast your way to sushi!";
+				UIText.GetComponent<TextController>().defaultText = defaultText;
+
+				inbound = true;
 				if (!Bomb.isPoweredUp) {
 					Bomb.isPoweredUp = true;
                 }
