@@ -11,7 +11,6 @@ public class Bomb : MonoBehaviour {
 	public float flashRate = 0.33f; //rate at which the bomb flashes
 	public Explosion explosion;
 	public static bool isPoweredUp = false;
-//	public Text UIText;
 
 	private float countDown;
 
@@ -27,7 +26,6 @@ public class Bomb : MonoBehaviour {
 		}
 		else if (countDown % flashRate <= flashRate / 3.0f) { //flash
 			gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-			//flashRate -= 0.1f * flashRate; //make flashes closer as bomb nears explosion TODO
 		}
 		else {
 		gameObject.GetComponent<SpriteRenderer>().color = Color.white;
@@ -54,10 +52,6 @@ public class Bomb : MonoBehaviour {
 					if (isPoweredUp) {
 						Destroy(obj.gameObject);
 					}
-//					else {
-//						if (UIText != null)
-//							UIText.text = "This door is too strong!  You need to find a master hacker to power up your bombs!";
-//					}
 				}
 			}
 			else if  (obj.gameObject.GetComponent<Player>() != null) { //player

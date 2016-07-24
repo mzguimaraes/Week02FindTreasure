@@ -13,7 +13,6 @@ public class Character : MonoBehaviour {
 			//increment player speed
 			other.GetComponent<Player>().moveScalar += 10;
 			text.text = "Character found!  Movement speed increased!";
-			//gameObject.SetActive(false);
 		}
 	}
 
@@ -21,6 +20,4 @@ public class Character : MonoBehaviour {
 		text.text = text.GetComponent<TextController>().defaultText;
 		gameObject.SetActive(false);
 	}
-
-
 }
