@@ -22,9 +22,8 @@ public class Genocide : MonoBehaviour {
         //Debug.Log(distance);
 	    if(distance < inboundDistance) {
             if (!inbound) {
-                UIText.text = "Anger Ninja: I only have bio sushi, you should ask Nancy Lee." +
-                	"\nHead back and go west at the white dart, then follow the orange darts.  " +
-                	"Wait--where did I leave that key?";
+                UIText.text = "Anger Ninja: This sushi isn't organic!  You can't eat this trash!" +
+                	"\nLeave it for me, I'll eat it all so you don't have to.";
                 inbound = true;
             }
         } else if (inbound && distance > outboundDistance) {

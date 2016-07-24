@@ -10,7 +10,7 @@ public class Bomb : MonoBehaviour {
 	public float blastForce = 500000f;
 	public float flashRate = 0.33f; //rate at which the bomb flashes
 	public Explosion explosion;
-	public static bool isPoweredUp;
+	public static bool isPoweredUp = false;
 //	public Text UIText;
 
 	private float countDown;
@@ -18,7 +18,6 @@ public class Bomb : MonoBehaviour {
 	// bomb dropped
 	void Start () {
 		countDown = fuseTime;
-		isPoweredUp = false;
 	}
 	
 	// Update is called once per frame

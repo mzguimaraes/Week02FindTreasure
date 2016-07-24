@@ -18,6 +18,7 @@ public class Character : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
+		text.text = text.GetComponent<TextController>().defaultText;
 		gameObject.SetActive(false);
 	}
 }
