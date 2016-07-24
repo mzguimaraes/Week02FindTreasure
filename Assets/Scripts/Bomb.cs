@@ -17,11 +17,13 @@ public class Bomb : MonoBehaviour {
 	// bomb dropped
 	void Start () {
 		countDown = fuseTime;
+		GetComponent<AudioSource>().Play();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (countDown <= 0) {
+			GetComponent<AudioSource>().Stop();
 			detonate();
 		}
 		else if (countDown % flashRate <= flashRate / 3.0f) { //flash

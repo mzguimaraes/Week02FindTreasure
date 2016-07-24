@@ -25,7 +25,7 @@ public class Goal : MonoBehaviour {
             }
         }
         if (didPlayerWin) {
-			SceneManager.LoadScene(2);
+			SceneManager.LoadScene(3);
         }
 	}
 }
