@@ -21,4 +21,6 @@ public class Character : MonoBehaviour {
 		text.text = text.GetComponent<TextController>().defaultText;
 		gameObject.SetActive(false);
 	}
+
+
 }

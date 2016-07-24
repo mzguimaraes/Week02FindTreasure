@@ -41,8 +41,6 @@ public class Bomb : MonoBehaviour {
 	 */
 	void detonate() {
 
-		Debug.Log(isPoweredUp);
-
 		//get array of colliders in range
 		Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, blastRadius);
 
@@ -54,7 +52,6 @@ public class Bomb : MonoBehaviour {
 				}
 				else { //isStrongWall == true
 					if (isPoweredUp) {
-						Debug.Log("strong destroy");
 						Destroy(obj.gameObject);
 					}
 //					else {
