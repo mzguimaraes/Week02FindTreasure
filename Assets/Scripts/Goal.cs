@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour {
     bool didPlayerWin = false;
@@ -23,7 +25,7 @@ public class Goal : MonoBehaviour {
             }
         }
         if (didPlayerWin) {
-            UIText.text = "Taste delicious! Wasshoi!~\nYOU WIN!!\n";
+			SceneManager.LoadScene(2);
         }
 	}
 }
