@@ -8,18 +8,12 @@ public class Genocide : MonoBehaviour {
 
     public float inboundDistance = 1.5f;
     public float outboundDistance = 4f;
-    // Use this for initialization
-    string defaultText;
-    bool inbound;
-	void Start () {
-        defaultText = UIText.GetComponent<TextController>().defaultText;
-        inbound = false;
-	}
+
+    bool inbound = false;
 	
 	// Update is called once per frame
 	void Update () {
         float distance = (player.position - transform.position).magnitude;
-        //Debug.Log(distance);
 	    if(distance < inboundDistance) {
             if (!inbound) {
                 UIText.text = "Anger Ninja: This sushi isn't organic!  You can't eat this trash!" +
@@ -27,7 +21,7 @@ public class Genocide : MonoBehaviour {
                 inbound = true;
             }
         } else if (inbound && distance > outboundDistance) {
-            UIText.text = defaultText;
+			UIText.text = UIText.GetComponent<TextController>().defaultText;
             inbound = false;
         }
 	}
